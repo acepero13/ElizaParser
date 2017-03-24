@@ -2,7 +2,7 @@ package de.dfki.eliza.files.readers;
 
 /**
  * Created by alvaro on 3/6/17.
- * Interfacee
+ * Interface
  */
 interface Readable {
     boolean open(String filname);
