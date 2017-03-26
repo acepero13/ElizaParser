@@ -44,8 +44,7 @@ public class ValueLine implements ValueLineBehavior {
     }
 
     private boolean isParsed(IntSeparatorParser p) {
-        boolean parsed =  p.parse();
-        return parsed;
+        return p.parse();
     }
 
 

@@ -16,6 +16,7 @@ public class MessageTest {
         String expected = "{Name}: " + text + " |1|2|-1|";
         String res = message.write();
         assertEquals(expected, res);
+
     }
 
     @Test

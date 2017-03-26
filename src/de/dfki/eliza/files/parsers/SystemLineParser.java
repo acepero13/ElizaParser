@@ -33,7 +33,6 @@ public class SystemLineParser extends Dialog {
         Textable m = Message.createAgentMessage(authorName, dialogLine.getText(),
                 valueLine.getIntAt(Dialog.VALUE_INDEX),
                 valueLine.getIntAt(Dialog.TOPIC_INDEX));
-        m.isUser(false);
         conversationFactory.getConversation().addMessage(m);
     }
 

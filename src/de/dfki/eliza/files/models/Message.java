@@ -81,9 +81,7 @@ public class Message implements Textable, Writable{
             return "";
         String author = writeAuthorName();
         String textLine = writeTextWithValues();
-        String line = author + textLine;
-
-        return line;
+        return author + textLine;
     }
 
     String writeTextWithValues() {
