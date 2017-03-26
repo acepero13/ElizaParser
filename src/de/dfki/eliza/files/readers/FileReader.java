@@ -2,7 +2,7 @@ package de.dfki.eliza.files.readers;
 
 
 import de.dfki.eliza.files.exceptions.IncorrectFileExtension;
-import de.dfki.eliza.files.filestystem.FileSystemAble;
+import de.dfki.eliza.files.filestystem.FileSystemReadable;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public abstract class FileReader implements Readable {
     protected String filename = null;
-    protected FileSystemAble fileSystem = null;
+    protected FileSystemReadable fileSystem = null;
     private BufferedReader bufferedReader = null;
 
     @Override

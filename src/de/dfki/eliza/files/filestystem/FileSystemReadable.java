@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
  * Created by alvaro on 3/6/17.
  * Interface
  */
-public interface FileSystemAble {
+public interface FileSystemReadable {
     boolean fileExists();
 
     String getFileExtension();
@@ -23,7 +23,6 @@ public interface FileSystemAble {
     boolean checkFileExtension() throws IncorrectFileExtension;
 
     void close();
-
 
 
 

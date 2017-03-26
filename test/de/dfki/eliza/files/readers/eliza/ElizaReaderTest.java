@@ -1,7 +1,7 @@
 package de.dfki.eliza.files.readers.eliza;
 
 import de.dfki.eliza.files.exceptions.IncorrectFileExtension;
-import de.dfki.eliza.files.filestystem.FileSystemAble;
+import de.dfki.eliza.files.filestystem.FileSystemReadable;
 import de.dfki.eliza.files.filestystem.eliza.ElizaFileSystem;
 import de.dfki.eliza.files.models.Conversation;
 import de.dfki.eliza.files.readers.FileReader;
@@ -23,7 +23,7 @@ public class ElizaReaderTest {
 
     @Test
     public void test_Open_WithExistingFilePathAndCorrectExtension_True() throws IncorrectFileExtension, FileNotFoundException {
-        FileSystemAble fakeFS = new FakeFileSystem("/tmp/test.txt");
+        FileSystemReadable fakeFS = new FakeFileSystem("/tmp/test.txt");
         makeReader("", fakeFS);
         boolean res = reader.open();
         assertTrue(res);
@@ -119,7 +119,7 @@ public class ElizaReaderTest {
         return lines;
     }
 
-    private void makeReader(String fileName, FileSystemAble fs) {
+    private void makeReader(String fileName, FileSystemReadable fs) {
         if(fileName.equals("")){
             reader = new ElizaReader( "",fs);
         }else {

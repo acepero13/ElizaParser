@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by alvaro on 3/21/17.
- */
 public class DotParserTest {
     private InfoNameParser parser;
 

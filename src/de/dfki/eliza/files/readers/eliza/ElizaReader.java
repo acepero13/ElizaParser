@@ -1,6 +1,6 @@
 package de.dfki.eliza.files.readers.eliza;
 
-import de.dfki.eliza.files.filestystem.FileSystemAble;
+import de.dfki.eliza.files.filestystem.FileSystemReadable;
 import de.dfki.eliza.files.filestystem.Writable;
 import de.dfki.eliza.files.models.Conversation;
 import de.dfki.eliza.files.parsers.*;
@@ -17,7 +17,7 @@ public class ElizaReader extends FileReader implements Writable {
     LinkedList<Conversation> conversations = new LinkedList<>();
     private Dialog firstDialogParser;
 
-    public ElizaReader(String fileName, FileSystemAble fs) {
+    public ElizaReader(String fileName, FileSystemReadable fs) {
         fileSystem = fs;
         filename = fileName;
         firstDialogParser = new NewChatParser(conversations);

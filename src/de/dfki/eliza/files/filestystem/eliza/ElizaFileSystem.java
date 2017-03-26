@@ -2,7 +2,7 @@ package de.dfki.eliza.files.filestystem.eliza;
 
 
 import de.dfki.eliza.files.exceptions.IncorrectFileExtension;
-import de.dfki.eliza.files.filestystem.FileSystemAble;
+import de.dfki.eliza.files.filestystem.FileSystemReadable;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -10,7 +10,7 @@ import java.io.*;
 /**
  * Created by alvaro on 3/6/17.
  */
-public class ElizaFileSystem implements FileSystemAble {
+public class ElizaFileSystem implements FileSystemReadable {
     private static final String RMDL_EXTENSION = "txt";
     private final String filename;
     private File file = null;
@@ -70,4 +70,5 @@ public class ElizaFileSystem implements FileSystemAble {
             e.printStackTrace();
         }
     }
+
 }
