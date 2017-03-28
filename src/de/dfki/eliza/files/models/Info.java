@@ -7,10 +7,12 @@ import de.dfki.eliza.renderer.Renderable;
 /**
  * Created by alvaro on 3/14/17.
  */
-public class Info implements Textable, Writable {
+public class Info implements Textable, Writable, Renderable {
+    private final Renderable render;
     private String text;
     public Info(String text, Renderable render){
-          this.text = text;
+        this.render = render;
+        this.text = text;
     }
 
     @Override
@@ -30,5 +32,10 @@ public class Info implements Textable, Writable {
             line = InfoUserLineParser.INFO_LINE + " " + getText();
         }
         return line;
+    }
+
+    @Override
+    public void render(int rowPosition, Textable message) {
+        this.render.render(rowPosition, message);
     }
 }

@@ -1,6 +1,7 @@
 package de.dfki.eliza.files.models;
 
 import de.dfki.eliza.files.filestystem.Writable;
+import de.dfki.eliza.renderer.Renderable;
 
 import java.util.LinkedList;
 
@@ -101,5 +102,13 @@ public class Conversation implements Writable {
         }
         return new Message();
 
+    }
+
+
+
+    public void render(int rowPosition) {
+        for (Renderable message: messages   ) {
+            message.render(0, (Textable) message);
+        }
     }
 }

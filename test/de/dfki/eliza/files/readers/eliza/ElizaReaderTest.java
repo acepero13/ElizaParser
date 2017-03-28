@@ -74,6 +74,7 @@ public class ElizaReaderTest {
         assertEquals(6, c.getTotalMessages());
     }
 
+
     @Test
     public void test_write_FakeLinesWithDictEntryAsSystemName_WrittenLines() {
         String name = "{dict-entry}";
@@ -96,6 +97,8 @@ public class ElizaReaderTest {
         assertEquals(expected, res);
 
     }
+
+
 
     private FakeFileSystem makeFileSystem(LinkedList<String> conversations) {
         FakeFileSystem fakeFS = new FakeFileSystem("/tmp/test.txt");

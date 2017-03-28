@@ -3,9 +3,12 @@ package de.dfki.eliza.files.models;
 import de.dfki.eliza.files.parsers.dialog.Dialog;
 import de.dfki.eliza.renderer.DummyRender;
 import de.dfki.eliza.renderer.Renderable;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by alvaro on 3/23/17.
@@ -62,7 +65,45 @@ public class ConversationTest {
 
     }
 
+    @Test
+    public void test_render_InfoRenderAndUserRender_TextRendered() {
+        makeConversation();
+        String text = "Info text";
+        InfoRender infoRender = new InfoRender(text);
+        Textable info = new Info(text, infoRender);
+        String systemText = "System text";
+        SystemRender systemRender = new SystemRender(systemText);
+        Textable system = Message.createAgentMessage("{Name}:", systemRender, systemText, 1,2);
+        conversation.addMessage(info);
+        conversation.addMessage(system);
+        conversation.render(0);
+        assertThat(infoRender.text, CoreMatchers.containsString("@@"));
+        assertThat(systemRender.text, CoreMatchers.containsString("##"));
+    }
+
     void makeConversation() {
         conversation = new Conversation();
+    }
+
+    private class InfoRender implements Renderable{
+        public String text;
+        public InfoRender(String text){
+            this.text = text;
+        }
+        @Override
+        public void render(int rowPosition, Textable message) {
+            this.text = "@@Info" + this.text + "@@";
+        }
+    }
+
+    private class SystemRender implements Renderable{
+        public String text;
+        public SystemRender(String text){
+            this.text = text;
+        }
+        @Override
+        public void render(int rowPosition, Textable message) {
+            this.text = "##Info" + this.text + "##";
+        }
     }
 }

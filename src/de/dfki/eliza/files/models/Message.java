@@ -6,8 +6,9 @@ import de.dfki.eliza.renderer.Renderable;
 /**
  * Created by alvaro on 3/14/17.
  */
-public class Message implements Textable, Writable{
+public class Message implements Textable, Writable, Renderable{
     public static final String PIPE_SEPARATOR = "|";
+    private Renderable render;
     private String text;
     private int value = -1;
     private int topic = -1;
@@ -19,19 +20,20 @@ public class Message implements Textable, Writable{
 
     }
 
-    public Message( String authorName, String text, int value, int topic){
+    private Message(Renderable render,  String authorName, String text, int value, int topic){
         this.text = text;
         this.value = value;
         this.topic = topic;
         this.authorName = authorName;
+        this.render = render;
     }
 
     public static Message createAgentMessage(String authorName, Renderable render, String text, int value, int topic){
-        return new Message(authorName, text, value, topic);
+        return new Message(render, authorName, text, value, topic);
     }
 
     public static Message createUserMessage(String authorName, Renderable render, String text, int value, int topic, int assessment){
-        Message m = new Message(authorName, text, value, topic);
+        Message m = new Message(render, authorName, text, value, topic);
         m.setAssessment(assessment);
         return m;
     }
@@ -100,5 +102,10 @@ public class Message implements Textable, Writable{
 
     public void setAssessment(int assessment) {
         this.assessment = assessment;
+    }
+
+    @Override
+    public void render(int rowPosition, Textable message) {
+        this.render.render(rowPosition, message);
     }
 }
