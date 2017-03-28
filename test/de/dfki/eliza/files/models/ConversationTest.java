@@ -1,6 +1,8 @@
 package de.dfki.eliza.files.models;
 
 import de.dfki.eliza.files.parsers.dialog.Dialog;
+import de.dfki.eliza.renderer.DummyRender;
+import de.dfki.eliza.renderer.Renderable;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,13 +12,14 @@ import static org.junit.Assert.*;
  */
 public class ConversationTest {
     private Conversation conversation;
+    private Renderable render = new DummyRender();
 
     @Test
     public void test_write_InfoMessageAndUserMessageAndSystemMeesage_WrittenLine() {
         makeConversation();
-        Textable info = new Info("Info text");
-        Textable user = Message.createUserMessage(Dialog.USER_NAME, "User Text", 1, 2, 3);
-        Textable system = Message.createAgentMessage("{Name}:", "System text", 1,2);
+        Textable info = new Info("Info text", render);
+        Textable user = Message.createUserMessage(Dialog.USER_NAME, render, "User Text", 1, 2, 3);
+        Textable system = Message.createAgentMessage("{Name}:", render, "System text", 1,2);
         conversation.addMessage(info);
         conversation.addMessage(user);
         conversation.addMessage(system);
@@ -38,9 +41,9 @@ public class ConversationTest {
     @Test
     public void test_write_InfoMessageAndUserMessageAndSystemMeesageUnpinned_WrittenLine() {
         makeConversation();
-        Textable info = new Info("Info text");
-        Textable user = Message.createUserMessage(Dialog.USER_NAME, "User Text", 1, 2, 3);
-        Textable system = Message.createAgentMessage("{Name}:", "System text", 1,2);
+        Textable info = new Info("Info text", render);
+        Textable user = Message.createUserMessage(Dialog.USER_NAME, render, "User Text", 1, 2, 3);
+        Textable system = Message.createAgentMessage("{Name}:", render, "System text", 1,2);
         conversation.addMessage(info);
         conversation.addMessage(user);
         conversation.addMessage(system);

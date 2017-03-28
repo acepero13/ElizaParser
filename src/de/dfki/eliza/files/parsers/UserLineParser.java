@@ -5,6 +5,7 @@ import de.dfki.eliza.files.models.Textable;
 import de.dfki.eliza.files.parsers.dialog.Dialog;
 import de.dfki.eliza.files.parsers.dialog.DialogLine;
 import de.dfki.eliza.files.parsers.dialog.ValueLine;
+import de.dfki.eliza.renderer.Renderable;
 
 import java.util.LinkedList;
 
@@ -14,6 +15,14 @@ import java.util.LinkedList;
 public class UserLineParser extends Dialog {
 
     private LinkedList<IntSeparatorParser> parsers = new LinkedList<>();
+
+    public UserLineParser(Renderable userRender) {
+        super(userRender);
+    }
+
+    public UserLineParser() {
+        super();
+    }
 
     @Override
     public boolean parseLine(String line) {
@@ -34,6 +43,7 @@ public class UserLineParser extends Dialog {
     public void postParsed(){
         Textable m = Message.createUserMessage(
                 Dialog.USER_NAME,
+                render,
                 dialogLine.getText(),
                 valueLine.getIntAt(VALUE_INDEX),
                 valueLine.getIntAt(TOPIC_INDEX),

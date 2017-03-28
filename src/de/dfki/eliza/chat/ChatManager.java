@@ -66,5 +66,9 @@ public class ChatManager {
         return  currentPosition > 0;
     }
 
+    public int getCurrentPosition(){
+        return currentPosition;
+    }
+
 
 }

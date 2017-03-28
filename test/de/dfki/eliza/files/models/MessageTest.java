@@ -1,5 +1,8 @@
 package de.dfki.eliza.files.models;
 
+import de.dfki.eliza.renderer.DummyRender;
+import de.dfki.eliza.renderer.Renderable;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,7 +15,8 @@ public class MessageTest {
     @Test
     public void test_write_AgentGoodLine_WrittenLine() {
         String text = "Hello world";
-        message = Message.createAgentMessage("{Name}:",text, 2, 1);
+        Renderable render = makeDummyRender();
+        message = Message.createAgentMessage("{Name}:", render, text, 2, 1);
         String expected = "{Name}: " + text + " |1|2|-1|";
         String res = message.write();
         assertEquals(expected, res);
@@ -22,7 +26,8 @@ public class MessageTest {
     @Test
     public void test_write_UserGoodLine_WrittenLine() {
         String text = "Hello world";
-        message = Message.createUserMessage("Sie:",text, 2, 1, 5);
+        Renderable render = makeDummyRender();
+        message = Message.createUserMessage("Sie:", render, text, 2, 1, 5);
         String expected = "Sie: " + text + " |1|2|5|";
         String res = message.write();
         assertEquals(expected, res);
@@ -31,9 +36,15 @@ public class MessageTest {
     @Test
     public void test_write_EmptyLine_Empty() {
         String text = "";
-        message = Message.createAgentMessage("{Name}:",text, 2, 1);
+        Renderable render = makeDummyRender();
+        message = Message.createAgentMessage("{Name}:", render, text, 2, 1);
         String expected = "";
         String res = message.write();
         assertEquals(expected, res);
+    }
+
+    @NotNull
+    private Renderable makeDummyRender() {
+        return new DummyRender();
     }
 }

@@ -50,7 +50,6 @@ public abstract class FileReader implements Readable {
         while ((line = bufferedReader.readLine()) != null) {
             parse(line);
         }
-        int a = 0;
     }
 
     @Override

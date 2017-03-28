@@ -7,6 +7,7 @@ import de.dfki.eliza.files.utils.nameparser.DotParser;
 import de.dfki.eliza.files.utils.nameparser.InfoNameParser;
 import de.dfki.eliza.files.utils.nameparser.NameParserCollection;
 import de.dfki.eliza.files.utils.nameparser.NameRegexFinder;
+import de.dfki.eliza.renderer.Renderable;
 
 
 /**
@@ -26,6 +27,11 @@ public class InfoUserLineParser extends Dialog {
         nameParsers.add(dotParser);
     }
 
+    public InfoUserLineParser(Renderable infoRender) {
+        super(infoRender);
+    }
+
+
     @Override
     public boolean parseLine(String line) {
         dialogLine = new DialogLine(line, INFO_LINE);
@@ -35,7 +41,7 @@ public class InfoUserLineParser extends Dialog {
 
     @Override
     public void postParsed() {
-        Textable info = new Info(dialogLine.getText());
+        Textable info = new Info(dialogLine.getText(), render);
         conversationFactory.getConversation().addMessage(info);
         conversationFactory.getConversation().setSystemName(agentName);
     }

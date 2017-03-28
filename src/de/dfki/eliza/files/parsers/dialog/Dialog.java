@@ -2,6 +2,8 @@ package de.dfki.eliza.files.parsers.dialog;
 
 import de.dfki.eliza.files.builders.ChatParser;
 import de.dfki.eliza.files.parsers.factories.ConversationFactory;
+import de.dfki.eliza.renderer.DummyRender;
+import de.dfki.eliza.renderer.Renderable;
 
 /**
  * Created by alvaro on 3/14/17.
@@ -15,12 +17,21 @@ public abstract class Dialog implements ChatParser {
     public static final int VALUE_INDEX = 1;
     public static final int TOPIC_INDEX = 0;
     public static final int ASSESSMENT_INDEX = 2;
+    protected   Renderable render;
 
     protected DialogLineBehavior dialogLine;
     protected ValueLineBehavior valueLine;
     protected abstract boolean parseLine(String line);
     protected ConversationFactory conversationFactory = ConversationFactory.getInstance();
     private Dialog nextParser;
+
+    public Dialog(){
+        this.render = new DummyRender();
+    }
+
+    public Dialog(Renderable render){
+        this.render = render;
+    }
 
     public boolean parse(String line){
         if(parseLine(line)){

@@ -1,6 +1,7 @@
 package de.dfki.eliza.files.models;
 
 import de.dfki.eliza.files.filestystem.Writable;
+import de.dfki.eliza.renderer.Renderable;
 
 /**
  * Created by alvaro on 3/14/17.
@@ -12,16 +13,11 @@ public class Message implements Textable, Writable{
     private int topic = -1;
     private boolean isUserMessage = false;
     private int assessment = -1;
+    private String authorName = "";
 
     public Message() {
 
     }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    private String authorName = "";
 
     public Message( String authorName, String text, int value, int topic){
         this.text = text;
@@ -30,17 +26,19 @@ public class Message implements Textable, Writable{
         this.authorName = authorName;
     }
 
-    public static Message createAgentMessage(String authorName, String text, int value, int topic){
+    public static Message createAgentMessage(String authorName, Renderable render, String text, int value, int topic){
         return new Message(authorName, text, value, topic);
     }
 
-    public static Message createUserMessage( String authorName, String text, int value, int topic, int assessment){
+    public static Message createUserMessage(String authorName, Renderable render, String text, int value, int topic, int assessment){
         Message m = new Message(authorName, text, value, topic);
         m.setAssessment(assessment);
         return m;
     }
 
-
+    public String getAuthorName() {
+        return authorName;
+    }
 
     public String getText() {
         return text;

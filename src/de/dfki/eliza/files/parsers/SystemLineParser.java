@@ -6,12 +6,21 @@ import de.dfki.eliza.files.parsers.dialog.Dialog;
 import de.dfki.eliza.files.parsers.dialog.DialogLine;
 import de.dfki.eliza.files.parsers.dialog.ValueLine;
 import de.dfki.eliza.files.parsers.factories.ConversationFactory;
+import de.dfki.eliza.renderer.Renderable;
 
 /**
  * Created by alvaro on 3/13/17.
  */
 public class SystemLineParser extends Dialog {
     String systemName = "{Name}";
+
+    public SystemLineParser(Renderable systemRender) {
+        super(systemRender);
+    }
+
+    public SystemLineParser() {
+        super();
+    }
 
     @Override
     public boolean parseLine(String line) {
@@ -30,7 +39,7 @@ public class SystemLineParser extends Dialog {
     @Override
     public void postParsed() {
         String authorName = systemName+ ":";
-        Textable m = Message.createAgentMessage(authorName, dialogLine.getText(),
+        Textable m = Message.createAgentMessage(authorName, render, dialogLine.getText(),
                 valueLine.getIntAt(Dialog.VALUE_INDEX),
                 valueLine.getIntAt(Dialog.TOPIC_INDEX));
         conversationFactory.getConversation().addMessage(m);

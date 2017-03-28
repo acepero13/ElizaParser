@@ -12,7 +12,7 @@ public class Conversation implements Writable {
     public static final String ANNOTATION_SEPARATOR = "#";
     public static final String NEW_LINE_SEPARATOR = "\n";
     private LinkedList<Textable> messages = new LinkedList<>();
-    private Annotation annotation;
+    private Annotation annotation = new Annotation();
     private String systemName  = "{Name}";
     public void addMessage(Textable m){
         messages.add(m);
@@ -58,11 +58,13 @@ public class Conversation implements Writable {
     }
 
     String writeMessages(String line) {
+        StringBuilder lineBuilder = new StringBuilder(line);
         for (Textable message : messages) {
             Writable writableMessage = (Writable) message;
-            line += writableMessage.write();
-            line += NEW_LINE_SEPARATOR;
+            lineBuilder.append(writableMessage.write());
+            lineBuilder.append(NEW_LINE_SEPARATOR);
         }
+        line = lineBuilder.toString();
         return line;
     }
 

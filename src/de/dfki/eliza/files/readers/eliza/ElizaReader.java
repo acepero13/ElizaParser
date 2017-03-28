@@ -5,6 +5,7 @@ import de.dfki.eliza.files.filestystem.Writable;
 import de.dfki.eliza.files.models.Conversation;
 import de.dfki.eliza.files.parsers.*;
 import de.dfki.eliza.files.parsers.dialog.Dialog;
+import de.dfki.eliza.files.parsers.factories.ParsersFactory;
 import de.dfki.eliza.files.readers.FileReader;
 
 import java.util.LinkedList;
@@ -20,19 +21,8 @@ public class ElizaReader extends FileReader implements Writable {
     public ElizaReader(String fileName, FileSystemReadable fs) {
         fileSystem = fs;
         filename = fileName;
-        firstDialogParser = new NewChatParser(conversations);
-        Dialog infoUserDialog = new InfoUserLineParser();
-        Dialog infoDialog = new InfoLineParser();
-        Dialog userLine = new UserLineParser();
-        Dialog systemLine = new SystemLineParser();
-        Dialog defenseStratey = new DefenseStrategyParser();
-
-        systemLine.setNextParser(defenseStratey);
-        userLine.setNextParser(systemLine);
-        infoDialog.setNextParser(userLine);
-        infoUserDialog.setNextParser(infoDialog);
-        firstDialogParser.setNextParser(infoUserDialog);
-
+        ParsersFactory factory = new ParsersFactory();
+        firstDialogParser = factory.createFirstParser(conversations);
     }
 
     @Override
@@ -50,10 +40,10 @@ public class ElizaReader extends FileReader implements Writable {
 
     @Override
     public String write() {
-        String line = "";
+        StringBuilder line = new StringBuilder();
         for (Writable conversation: conversations ) {
-            line += conversation.write();
+            line.append(conversation.write());
         }
-        return line;
+        return line.toString();
     }
 }

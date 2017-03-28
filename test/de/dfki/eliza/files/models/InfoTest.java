@@ -1,5 +1,7 @@
 package de.dfki.eliza.files.models;
 
+import de.dfki.eliza.renderer.DummyRender;
+import de.dfki.eliza.renderer.Renderable;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +11,7 @@ import static org.junit.Assert.*;
  */
 public class InfoTest {
     private Info info;
+
 
     @Test
     public void test_write_NormalTexLine_LineWithPrefixInfo() {
@@ -28,7 +31,8 @@ public class InfoTest {
     }
 
     void makeInfo(String text) {
-        info = new Info(text);
+        Renderable render = new DummyRender();
+        info = new Info(text, render);
     }
 
 }
