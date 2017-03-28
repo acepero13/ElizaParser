@@ -2,7 +2,6 @@ package de.dfki.eliza.files.models;
 
 import de.dfki.eliza.renderer.DummyRender;
 import de.dfki.eliza.renderer.Renderable;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -43,7 +42,6 @@ public class MessageTest {
         assertEquals(expected, res);
     }
 
-    @NotNull
     private Renderable makeDummyRender() {
         return new DummyRender();
     }
