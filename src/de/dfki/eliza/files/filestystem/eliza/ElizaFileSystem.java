@@ -71,4 +71,9 @@ public class ElizaFileSystem implements FileSystemReadable {
         }
     }
 
+    @Override
+    public String getFilename() {
+        return this.filename;
+    }
+
 }

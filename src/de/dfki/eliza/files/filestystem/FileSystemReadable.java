@@ -24,6 +24,8 @@ public interface FileSystemReadable {
 
     void close();
 
+    String getFilename();
+
 
 
 }

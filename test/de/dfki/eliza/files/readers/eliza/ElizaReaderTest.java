@@ -121,9 +121,9 @@ public class ElizaReaderTest {
 
     private void makeReader(String fileName, FileSystemReadable fs) {
         if(fileName.equals("")){
-            reader = new ElizaReader( "",fs);
+            reader = new ElizaReader(fs);
         }else {
-            reader = new ElizaReader(fileName, fs);
+            reader = new ElizaReader( fs);
         }
     }
 

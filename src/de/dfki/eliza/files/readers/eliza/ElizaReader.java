@@ -7,6 +7,7 @@ import de.dfki.eliza.files.parsers.*;
 import de.dfki.eliza.files.parsers.dialog.Dialog;
 import de.dfki.eliza.files.parsers.factories.ParsersFactory;
 import de.dfki.eliza.files.readers.FileReader;
+import de.dfki.eliza.renderer.Renderable;
 
 import java.util.LinkedList;
 
@@ -18,12 +19,20 @@ public class ElizaReader extends FileReader implements Writable {
     LinkedList<Conversation> conversations = new LinkedList<>();
     private Dialog firstDialogParser;
 
-    public ElizaReader(String fileName, FileSystemReadable fs) {
+    public ElizaReader(FileSystemReadable fs) {
         fileSystem = fs;
-        filename = fileName;
+        filename = fs.getFilename();
         ParsersFactory factory = new ParsersFactory();
         firstDialogParser = factory.createFirstParser(conversations);
     }
+
+    public ElizaReader(FileSystemReadable fs, Renderable infoRender, Renderable userRender, Renderable systemRender) {
+        fileSystem = fs;
+        filename = fs.getFilename();
+        ParsersFactory factory = new ParsersFactory();
+        firstDialogParser = factory.createFirstParserWithRenders(conversations, infoRender, userRender, systemRender);
+    }
+
 
     @Override
     public void parse(String line) {
