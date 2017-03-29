@@ -11,11 +11,34 @@ public class SystemLineParserTest {
     private SystemLineParser parser;
 
     @Test
-    public void test_parse_Scenario_Behavior() {
+    public void test_parse_InfoNameTheSameWithSystemName_ParsedText() {
         makeFakeParser();
         ((FakeSystemLineParser)parser).systemN = "{Name}";
         String expected = "Hallo welt";
         String line = "{Name}: " + expected;
+        parser.parse(line);
+        String res = parser.getText();
+        assertEquals(expected, res);
+    }
+
+    @Test
+    public void test_parse_InfoNameDifferentFromSystemName_ParsedText() {
+        makeFakeParser();
+        ((FakeSystemLineParser)parser).systemN = "{Name}";
+        String expected  = "Hallo welt";
+        String line = "{dict-entry} " + expected;
+        parser.parse(line);
+        String res = parser.getText();
+        assertEquals(expected, res);
+    }
+
+    @Test
+    public void test_parse_InfoNameWithoutBracketsAndEqualsToSystemName_ParsedText() {
+        makeFakeParser();
+        String systemName = "Alvaro";
+        ((FakeSystemLineParser)parser).systemN = systemName;
+        String expected = "Hallo welt";
+        String line = systemName + " " + expected;
         parser.parse(line);
         String res = parser.getText();
         assertEquals(expected, res);
@@ -30,7 +53,7 @@ public class SystemLineParserTest {
             super();
         }
         public String systemN;
-        void getSystemName(){
+        void getSystemName(String line){
             systemName = systemN;
         }
     }

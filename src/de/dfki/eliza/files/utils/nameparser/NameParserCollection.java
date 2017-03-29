@@ -23,7 +23,7 @@ public class NameParserCollection {
         try {
             name = parseName(line);
         } catch (LineHasNoName lineHasNoName) {
-            lineHasNoName.printStackTrace();
+
         }
         return name;
     }
@@ -42,7 +42,7 @@ public class NameParserCollection {
             parsed = parser.parse(line);
         }
         if(!parsed){
-            throw new LineHasNoName("Line has no name");
+            throw new LineHasNoName("Line has no name" + line);
         }
         return parser;
     }

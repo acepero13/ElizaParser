@@ -1,11 +1,11 @@
 package de.dfki.eliza.files.models;
 
-import de.dfki.eliza.files.filestystem.Writable;
+
 
 /**
  * Created by alvaro on 3/13/17.
  */
-public class Annotation implements Writable{
+public class Annotation {
     private int value = -1;
     private boolean isPinned = false;
     private int assesment = -1;
@@ -37,11 +37,6 @@ public class Annotation implements Writable{
 
     public void setAssesment(int assesment) {
         this.assesment = assesment;
-    }
-
-    @Override
-    public String write() {
-        return "";
     }
 
     public String getPinnedString(){
