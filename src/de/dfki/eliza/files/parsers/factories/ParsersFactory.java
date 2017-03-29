@@ -21,6 +21,7 @@ public class ParsersFactory {
 
     public NewChatParser createFirstParserWithRenders(LinkedList<Conversation> conversations,
                                                       Renderable infoRender, Renderable userRender, Renderable systemRender){
+        this.conversations = conversations;
         firstDialogParser = new NewChatParser(getConversations());
         Dialog infoUserDialog = new InfoUserLineParser(infoRender);
         Dialog infoDialog = new InfoLineParser(infoRender);
