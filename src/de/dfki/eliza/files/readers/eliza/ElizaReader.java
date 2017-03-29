@@ -20,17 +20,19 @@ public class ElizaReader extends FileReader implements Writable {
     private Dialog firstDialogParser;
 
     public ElizaReader(FileSystemReadable fs) {
-        fileSystem = fs;
-        filename = fs.getFilename();
-        ParsersFactory factory = new ParsersFactory();
+        ParsersFactory factory = init(fs);
         firstDialogParser = factory.createFirstParser(conversations);
     }
 
     public ElizaReader(FileSystemReadable fs, Renderable infoRender, Renderable userRender, Renderable systemRender) {
+        ParsersFactory factory = init(fs);
+        firstDialogParser = factory.createFirstParserWithRenders(conversations, infoRender, userRender, systemRender);
+    }
+
+    private ParsersFactory init(FileSystemReadable fs) {
         fileSystem = fs;
         filename = fs.getFilename();
-        ParsersFactory factory = new ParsersFactory();
-        firstDialogParser = factory.createFirstParserWithRenders(conversations, infoRender, userRender, systemRender);
+        return new ParsersFactory();
     }
 
 
