@@ -77,8 +77,8 @@ public class ConversationTest {
         conversation.addMessage(info);
         conversation.addMessage(system);
         conversation.render();
-        assertThat(infoRender.text, CoreMatchers.containsString("@@"));
-        assertThat(systemRender.text, CoreMatchers.containsString("##"));
+        assertTrue(infoRender.text.contains("@@"));
+        assertTrue(systemRender.text.contains("##"));
     }
 
     void makeConversation() {
