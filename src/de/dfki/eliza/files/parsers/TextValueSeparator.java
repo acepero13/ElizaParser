@@ -6,15 +6,14 @@ public class TextValueSeparator {
     private final String separator;
     private LinkedList<Integer> values = new LinkedList<>();
     private LinkedList<String> text = new LinkedList<>();
-    private String[] splitted;
 
     public TextValueSeparator(String separator){
         this.separator = separator;
     }
 
     public void parseLine(String text) {
-        splitted = text.split(separator);
-        for (String sValue: splitted ) {
+        String[] splitted = text.split(separator);
+        for (String sValue: splitted) {
             parse(sValue);
         }
     }

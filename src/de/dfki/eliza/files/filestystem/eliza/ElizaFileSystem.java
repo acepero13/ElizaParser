@@ -11,7 +11,8 @@ import java.io.*;
  * Created by alvaro on 3/6/17.
  */
 public class ElizaFileSystem implements FileSystemReadable {
-    private static final String RMDL_EXTENSION = "txt";
+    private static final String READ_EXTENSION = "txt";
+    private static final String WRITE_EXTENSION = "tca";
     private final String filename;
     private File file = null;
     private FileReader fileReader = null;
@@ -55,7 +56,7 @@ public class ElizaFileSystem implements FileSystemReadable {
 
     @Override
     public boolean checkFileExtension() throws IncorrectFileExtension {
-        if (!getFileExtension().equals(RMDL_EXTENSION)) {
+        if (!getFileExtension().equals(READ_EXTENSION) && !getFileExtension().equals(WRITE_EXTENSION)) {
             throw new IncorrectFileExtension();
         }
         return true;

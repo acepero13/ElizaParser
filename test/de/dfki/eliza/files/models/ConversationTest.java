@@ -76,7 +76,7 @@ public class ConversationTest {
         Textable system = Message.createAgentMessage("{Name}:", systemRender, systemText, 1,2);
         conversation.addMessage(info);
         conversation.addMessage(system);
-        conversation.render(0);
+        conversation.render();
         assertThat(infoRender.text, CoreMatchers.containsString("@@"));
         assertThat(systemRender.text, CoreMatchers.containsString("##"));
     }

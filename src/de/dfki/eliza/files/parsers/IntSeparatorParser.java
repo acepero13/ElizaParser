@@ -7,14 +7,12 @@ import java.util.LinkedList;
  */
 public class IntSeparatorParser {
     public static final int DEFAULT_INT_VALUE = -1;
-    private final String separator;
     private final String text;
     private final TextValueSeparator textValueSeparator;
     private int appearances;
 
 
     public IntSeparatorParser(String separator, String text, int appearances) {
-        this.separator = separator;
         this.text = text;
         this.appearances = appearances;
         textValueSeparator = new TextValueSeparator(separator);
@@ -42,7 +40,7 @@ public class IntSeparatorParser {
     public int getIntAt(int pos) {
         LinkedList<Integer> values = getValues();
         if (pos < values.size()) {
-            return Integer.valueOf(values.get(pos));
+            return values.get(pos);
         }
         return DEFAULT_INT_VALUE;
     }

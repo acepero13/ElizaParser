@@ -8,15 +8,17 @@ import de.dfki.eliza.files.models.Conversation;
 public class ConversationFactory {
 
     private Conversation conversation;
-    private static ConversationFactory instance = null;
+
     private ConversationFactory(){
         conversation = new Conversation();
     }
 
+    private static class InstanceHolder {
+        private static final ConversationFactory instance = new ConversationFactory();
+    }
+
     public static ConversationFactory getInstance(){
-        if(instance == null)
-            instance = new ConversationFactory();
-        return instance;
+        return InstanceHolder.instance;
     }
 
     public Conversation getConversation(){

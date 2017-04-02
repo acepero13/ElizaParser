@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
  */
 public class NameRegexFinder implements InfoNameParser{
     private String name = "";
-    private Pattern p;
-    private boolean found = false;
 
     public boolean parse(String txt) {
 
@@ -18,10 +16,10 @@ public class NameRegexFinder implements InfoNameParser{
         String re3 = "((?:[a-z][a-z]+))";    // Word 1
         String re4 = "(-)*";    // Any Single Character 2
         String re5 = "((?:[a-z][a-z]+))";    // Word 2
-        String re6 = "(\\})";    // Any Single Character 3
-        p = Pattern.compile(re1 + re2 + re3 + re4 + re5 + re6, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+        String re6 = "(})";    // Any Single Character 3
+        Pattern p = Pattern.compile(re1 + re2 + re3 + re4 + re5 + re6, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher m = p.matcher(txt);
-        found = m.find();
+        boolean found = m.find();
         if (found) {
             buildName(m);
         }

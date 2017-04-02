@@ -23,6 +23,7 @@ public class DefenseStrategyParser extends Dialog {
 
 
     public void postParsed() {
+        annotation = new Annotation();
         annotation.setValue(valueLine.getIntAt(0));
         int pinnedInt = valueLine.getIntAt(1);
         if (pinnedInt == 1) {
@@ -30,6 +31,7 @@ public class DefenseStrategyParser extends Dialog {
         } else {
             annotation.unsetPinned();
         }
+        annotation.setAssesment(valueLine.getIntAt(2));
         conversationFactory.getConversation().setAnnotation(annotation);
 
     }

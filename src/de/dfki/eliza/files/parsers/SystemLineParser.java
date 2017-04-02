@@ -52,7 +52,7 @@ public class SystemLineParser extends Dialog {
         Iterator<InfoNameParser> parserIterator = nameParsers.iterator();
         boolean parsed = false;
         InfoNameParser parser = null;
-        while (!parsed && parserIterator.hasNext() ) {
+        while (!parsed && parserIterator.hasNext()) {
             parser = parserIterator.next();
             parsed = parser.parse(line);
         }

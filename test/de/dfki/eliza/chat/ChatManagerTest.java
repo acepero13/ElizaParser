@@ -121,10 +121,11 @@ public class ChatManagerTest {
     }
 
     @Test
-    public void test_hasPrevious_TwoElementPositionedInTheFirst_True() throws NoValidConversation {
+    public void test_hasPrevious_TwoElementAndPositionedInTheFirst_True() throws NoValidConversation {
         LinkedList<Conversation> conversations = new LinkedList<>();
         makeTwoConversationChat(conversations);
         makeConversation(conversations);
+        chat.getNextConversation();
         chat.getNextConversation();
         boolean res = chat.hasPrevious();
         assertTrue(res);

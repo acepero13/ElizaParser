@@ -1,5 +1,6 @@
 package de.dfki.eliza.chat;
 
+import de.dfki.eliza.chat.decorators.ChatManagerDecorator;
 import de.dfki.eliza.files.exceptions.NoValidConversation;
 import de.dfki.eliza.files.models.Conversation;
 
@@ -8,12 +9,18 @@ import java.util.LinkedList;
 /**
  * Created by alvaro on 3/24/17.
  */
-public class ChatManager {
-    private int currentPosition = 0;
+public class ChatManager implements ChatManagerDecorator {
+    private int currentPosition = -1;
     private  LinkedList<Conversation> conversations = new LinkedList<>();
 
     public ChatManager(LinkedList<Conversation> conversations){
         this.conversations = conversations;
+    }
+
+    public ChatManager(ChatManager another){
+        this.conversations = another.conversations;
+
+
     }
 
     public int getTotalConversations() {
@@ -22,14 +29,14 @@ public class ChatManager {
 
 
     public Conversation getNextConversation() throws NoValidConversation {
-        int oldPosition  = currentPosition;
+        int oldPosition = currentPosition;
+        increasePosition();
         isInvalidPosition(oldPosition);
         Conversation conversation = conversations.get(currentPosition);
-        increasePosition();
         return conversation;
     }
 
-    void increasePosition() {
+    public void increasePosition() {
         currentPosition++;
     }
 
@@ -54,12 +61,12 @@ public class ChatManager {
         return conversations.get(currentPosition);
     }
 
-    void decreasePosition() {
+    public void decreasePosition() {
         currentPosition--;
     }
 
     public boolean hastNext() {
-        return currentPosition < conversations.size();
+        return currentPosition < conversations.size() -1 && currentPosition >= -1  && conversations.size() > 0;
     }
 
     public boolean hasPrevious() {
@@ -68,6 +75,13 @@ public class ChatManager {
 
     public int getCurrentPosition(){
         return currentPosition;
+    }
+
+    public void reset(){
+        currentPosition = -1;
+    }
+    public void resetToPosition(int position){
+        currentPosition = position;
     }
 
 

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Created by alvaro on 3/14/17.
  */
-public class Conversation implements Writable {
+public class Conversation implements Writable, Messagable {
     public static final String CHAT_INIT_MARKER = "--------------------------";
     public static final String ANNOTATION_SEPARATOR = "#";
     public static final String NEW_LINE_SEPARATOR = "\n";
@@ -40,6 +40,7 @@ public class Conversation implements Writable {
         this.systemName = systemName;
     }
 
+    @Override
     public LinkedList<Textable> getMessages(){
         return messages;
     }
@@ -106,9 +107,10 @@ public class Conversation implements Writable {
 
 
 
-    public void render(int rowPosition) {
+    public void render() {
+        int rowPosition = 0;
         for (Renderable message: messages   ) {
-            message.render(0, (Textable) message);
+            message.render(rowPosition++, (Textable) message);
         }
     }
 }
